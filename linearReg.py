@@ -3,11 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 dataset = pd.read_csv("C:\\Users\\misar\\Dropbox\\Mon PC (DESKTOP-HUVBVN6)\\Desktop\\Data\\RegressionDataset\\student_scores.csv")
-# dataset.plot(x='Hours',y='Scores',style='*')
-# plt.title('Student Score Relation')
-# plt.xlabel('Hour Precentage')
-# plt.ylabel('Score Precentage')
-# plt.show()
+
+
 
 def simpleLinerRegression(x,y):
     xi=x
