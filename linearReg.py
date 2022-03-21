@@ -2,6 +2,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
+
+#path of dataset
 dataset = pd.read_csv("C:\\Users\\misar\\Dropbox\\Mon PC (DESKTOP-HUVBVN6)\\Desktop\\Data\\RegressionDataset\\student_scores.csv")
 
 
@@ -46,3 +48,37 @@ def gradianDesend(x,y,w,b,iteration,alpha):
             w = w-alpha*(dw/m)
             b = b-alpha*(db/m)
     return w,b
+
+# model with gradient Desend
+def model(x,y,iteration,learnigRate):
+    xi=x
+    yi=y
+    # moyen of the input
+    x_mean = xi.mean()
+    y_mean = yi.mean()
+    # the total nbr of x element
+    n = len(xi)
+    
+    # starte calculiting equation y = a + W*x
+    Y1 = (xi*yi).sum()
+    Y2 = (xi.sum()*yi.sum())/n
+    
+    X1 = (xi*xi).sum()
+    X2 = (xi.sum()*xi.sum())/n
+    
+    # calculiting the Weight (W)
+    w = (Y1-Y2)/(X1-X2)
+    
+    # calculeting intercept
+    a = y_mean - w*x_mean
+    #GradientDesend Algorithm
+    for i in range(iteration):
+        dw=0
+        db=0
+        for j in range(n):
+            w = w-learnigRate*(dw/n)
+            a=a-learnigRate*(db/n)
+    #End Gradient Desend Algorithm
+
+
+    return w,a
