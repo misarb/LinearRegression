@@ -8,46 +8,38 @@ dataset = pd.read_csv("C:\\Users\\misar\\Dropbox\\Mon PC (DESKTOP-HUVBVN6)\\Desk
 
 
 
-def simpleLinerRegression(x,y):
-    xi=x
-    yi=y
-    # moyen of the input
-    x_mean = xi.mean()
-    y_mean = yi.mean()
-    # the total nbr of x element
-    n = len(xi)
+# def simpleLinerRegression(x,y):
+#     xi=x
+#     yi=y
+#     # moyen of the input
+#     x_mean = xi.mean()
+#     y_mean = yi.mean()
+#     # the total nbr of x element
+#     n = len(xi)
     
-    # starte calculiting equation y = a + W*x
-    Y1 = (xi*yi).sum()
-    Y2 = (xi.sum()*yi.sum())/n
+#     # starte calculiting equation y = a + W*x
+#     Y1 = (xi*yi).sum()
+#     Y2 = (xi.sum()*yi.sum())/n
     
-    X1 = (xi*xi).sum()
-    X2 = (xi.sum()*xi.sum())/n
+#     X1 = (xi*xi).sum()
+#     X2 = (xi.sum()*xi.sum())/n
     
-    # calculiting the Weight (W)
-    w = (Y1-Y2)/(X1-X2)
+#     # calculiting the Weight (W)
+#     w = (Y1-Y2)/(X1-X2)
     
-    # calculeting intercept
-    a = y_mean - w*x_mean
-    return a,w
+#     # calculeting intercept
+#     a = y_mean - w*x_mean
+#     return a,w
 
 lenght = len(dataset)
 train = dataset[:(int(lenght*0.8))]
 test=dataset[(int(lenght*0.8)):]
-print("x shape",train.shape,"y shape",test.shape)
+print("train_shape= ",train.shape,"test_shape = ",test.shape)
 
-a,w = simpleLinerRegression(train['Hours'],train['Scores'])
-print("Y = ",a,"X*",w)
+# a,w = simpleLinerRegression(train['Hours'],train['Scores'])
 
-def gradianDesend(x,y,w,b,iteration,alpha):
-    dw=0
-    db=0
-    m=x.shape[0]
-    for i in range(iteration):
-        for j in range(m):
-            w = w-alpha*(dw/m)
-            b = b-alpha*(db/m)
-    return w,b
+
+
 
 # model with gradient Desend
 def model(x,y,iteration,learnigRate):
@@ -82,3 +74,17 @@ def model(x,y,iteration,learnigRate):
 
 
     return w,a
+
+w,a = model(train['Hours'],train['Scores'],100,0.0000001)
+print("Y = ",a,"X*",w)
+
+#predact values
+def predict_Regression(w,a,inputFeateur):
+    predict = a+w*inputFeateur
+    return predict
+
+listInput = [1,80,15,20,50,13]
+
+for i in range(len(listInput)):
+    predacValue = predict_Regression(w,a,listInput[i])
+    print("valueInput = ",listInput[i],"predacted Score = ",predacValue)
